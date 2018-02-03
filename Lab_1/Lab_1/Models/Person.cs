@@ -7,8 +7,10 @@ namespace Lab_1.Models
 {
     public class Person
     {
-        string Name;
-        int Age;
-        string Shoes;
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+        public string Shoes { get; set; }
     }
 }
