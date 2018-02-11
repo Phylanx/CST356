@@ -27,16 +27,24 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.IsCompleted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EndDate)
+            @Html.DisplayFor(model => model.IsCompleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
         </dd>
 
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Details", "User", new { id = Model.UserId }, null)
+    @Html.ActionLink("Back to List", "Index", new { id = Model.UserId })
 </p>

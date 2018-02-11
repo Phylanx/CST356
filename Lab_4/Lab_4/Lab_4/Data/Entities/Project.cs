@@ -12,8 +12,8 @@ namespace Lab_4.Data.Entities
         public int Id { get; set; }
         public string ProjectName { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public string ProjectDescription { get; set; }
+        public bool IsCompleted { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

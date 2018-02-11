@@ -39,7 +39,7 @@ namespace Lab_4.Controllers
         }
 
        [HttpGet]
-       public ActionResult Details(int id = 0)
+       public ActionResult Details(int id)
         {
             return View(GetUserModel(id));
         }
@@ -78,7 +78,7 @@ namespace Lab_4.Controllers
         public UserModel GetUserModel(int id)
         {
             var user = new WebAppDBContext().Users.Find(id);
-            return new UserModel(user);
+            return ExtractModel(user);
         }
         private IEnumerable<UserModel> GetUsers()
         {
@@ -86,7 +86,7 @@ namespace Lab_4.Controllers
             var dbContext = new WebAppDBContext();
             foreach (var user in dbContext.Users)
             {
-                users.Add(new UserModel(user));
+                users.Add(ExtractModel(user));
             }
             return users;
         }
@@ -105,7 +105,7 @@ namespace Lab_4.Controllers
             };
         }
 
-        private UserModel ExtractUserModel(User user)
+        private UserModel ExtractModel(User user)
         {
             return new UserModel
             {
@@ -122,7 +122,7 @@ namespace Lab_4.Controllers
         private void SaveUser(UserModel userModel)
         {
             var dbContext = new WebAppDBContext();
-            dbContext.Users.Add(new UserModel(userModel));
+            dbContext.Users.Add(ExtractUser(userModel));
             dbContext.SaveChanges();
         }
 
@@ -131,7 +131,14 @@ namespace Lab_4.Controllers
             var dbContext = new WebAppDBContext();
             var oldUserData = dbContext.Users.Find(userModel.Id);
             dbContext.Users.Remove(oldUserData);
-            dbContext.Users.Add(userModel);
+            dbContext.Users.Add(ExtractUser(userModel));
+            dbContext.SaveChanges();
+        }
+
+        public void AddProject(Project project)
+        {
+            var dbContext = new WebAppDBContext();
+            dbContext.Projects.Add(project);
             dbContext.SaveChanges();
         }
     }

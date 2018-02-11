@@ -6,22 +6,21 @@ using System.Web;
 
 namespace Lab_4.Models
 {
-    public class ProjectModel
+    public class ProjectListModel
     {
-        public int Id { get; set; }
-
         [Required]
+        public int UserId { get; set; }
+
         [Display(Name = "Project Name")]
         public string ProjectName { get; set; }
-
-        [Required]
+        
         [Display(Name = "Start Date")]
-        public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime StartDate { get; set; }
 
         [Display(Name = "Completion Status")]
         public bool IsCompleted { get; set; } = false;
 
         [Required]
-        public int UserId { get; set; }
+        public ICollection<ProjectModel> ProjectsList { get; set; }
     }
 }

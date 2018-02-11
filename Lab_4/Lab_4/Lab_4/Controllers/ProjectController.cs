@@ -1,9 +1,7 @@
 ﻿using Lab_4.Data;
+using Lab_4.Data.Entities;
 using Lab_4.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Lab_4.Controllers
@@ -13,16 +11,19 @@ namespace Lab_4.Controllers
 
 
         [HttpGet]
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id)
         {
-            return View(GetProjects(id));
+            var user = new WebAppDBContext().Users.Find(id);
+            string name = user.FirstName + " " + user.LastName;
+            ViewBag.UserName = name;
+            return View(GetProjectsList(id));
         }
 
         [HttpGet]
-        public ActionResult Create(int userId = 0)
+        public ActionResult Create(int id)
         {
             var project = new ProjectModel();
-            project.UserId = userId;
+            project.UserId = id;
             return View(project);
         }
 
@@ -31,9 +32,9 @@ namespace Lab_4.Controllers
         {
             if (ModelState.IsValid)
             {
-                SaveProject(project);
+                SaveProject(ExtractProject(project));
 
-                return RedirectToAction("Details", "User", project.UserId);
+                return RedirectToAction("Index", project.UserId);
             }
             else
             {
@@ -59,9 +60,9 @@ namespace Lab_4.Controllers
         {
             if (ModelState.IsValid)
             {
-                SaveProject(project);
+                SaveEditProject(ExtractProject(project));
 
-                return RedirectToAction("Details", "User", project.UserId);
+                return RedirectToAction("Index", project.UserId);
             }
             else
             {
@@ -69,39 +70,60 @@ namespace Lab_4.Controllers
             }
         }
 
-        private IEnumerable<ProjectModel> GetProjects()
+        private ProjectListModel GetProjectsList(int id)
         {
             var projects = new List<ProjectModel>();
             var dbContext = new WebAppDBContext();
             foreach (var project in dbContext.Projects)
             {
-                projects.Add(new ProjectModel(project));
-            }
-            return projects;
-        }
-
-        private IEnumerable<ProjectModel> GetProjects(int userId)
-        {
-            var projects = new List<ProjectModel>();
-            var dbContext = new WebAppDBContext();
-            foreach (var project in dbContext.Projects)
-            {
-                if(project.UserId == userId)
+                if(project.UserId == id)
                 {
-                    projects.Add(new ProjectModel(project));
+                    projects.Add(ExtractModel(project));
                 }
             }
-            return projects;
+            return new ProjectListModel
+            {
+                UserId = id,
+                ProjectName = "",
+                StartDate = System.DateTime.Now,
+                IsCompleted = false,
+                ProjectsList = projects
+            };
         }
 
-        private void SaveProject(ProjectModel project)
+        private Project ExtractProject(ProjectModel project)
+        {
+            return new Project
+            {
+                Id = project.Id,
+                ProjectName = project.ProjectName,
+                StartDate = project.StartDate,
+                IsCompleted = project.IsCompleted,
+                UserId = project.UserId,
+                User = new WebAppDBContext().Users.Find(project.UserId)
+            };
+        }
+
+        public ProjectModel ExtractModel(Project project)
+        {
+            return new ProjectModel
+            {
+                Id = project.Id,
+                ProjectName = project.ProjectName,
+                StartDate = project.StartDate,
+                IsCompleted = project.IsCompleted,
+                UserId = project.UserId
+            };
+        }
+
+        private void SaveProject(Project project)
         {
             var dbContext = new WebAppDBContext();
             dbContext.Projects.Add(project);
             dbContext.SaveChanges();
         }
 
-        private void SaveEditProject(ProjectModel project)
+        private void SaveEditProject(Project project)
         {
             var dbContext = new WebAppDBContext();
             var oldProjectData = dbContext.Projects.Find(project.Id);
@@ -110,18 +132,11 @@ namespace Lab_4.Controllers
             dbContext.SaveChanges();
         }
 
-        private void Delete(int projectId)
-        {
-            var db = new WebAppDBContext();
-            db.Projects.Remove(db.Projects.Find(projectId));
-            db.SaveChanges();
-        }
-
-        public String GetUser(int userId)
+        private void Delete(int id)
         {
             var dbContext = new WebAppDBContext();
-            var user = dbContext.Users.Find(userId);
-            return user.FirstName + " " + user.LastName;
+            dbContext.Projects.Remove(dbContext.Projects.Find(id));
+            dbContext.SaveChanges();
         }
     }
 }

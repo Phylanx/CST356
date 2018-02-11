@@ -16,7 +16,7 @@ namespace Lab_4.Data.Entities
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string TypingStyle { get; set; }
-        public ICollection<Project> Projects { get; set; }
+        //public ICollection<Project> Projects { get; set; }
 
     }
 }

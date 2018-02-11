@@ -1,10 +1,6 @@
 ﻿
-using Lab_4.Models;
-using System;
-using System.Collections.Generic;
+using Lab_4.Data.Entities;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace Lab_4.Data
 {
@@ -20,9 +16,11 @@ namespace Lab_4.Data
             Database.SetInitializer(new WebAppDBInitializer());
         }
 
-        public virtual DbSet<UserModel> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
-        public virtual DbSet<ProjectModel> Projects { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+
+        public System.Data.Entity.DbSet<Lab_4.Models.ProjectModel> ProjectModels { get; set; }
     }
 
     public class WebAppDBInitializer : DropCreateDatabaseIfModelChanges<WebAppDBContext>

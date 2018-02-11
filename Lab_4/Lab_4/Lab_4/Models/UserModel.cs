@@ -8,17 +8,6 @@ namespace Lab_4.Models
 {
     public class UserModel
     {
-        public UserModel() { }
-        public UserModel(UserModel other)
-        {
-            Id = other.Id;
-            FirstName = other.FirstName;
-            MiddleName = other.MiddleName;
-            LastName = other.LastName;
-            Email = other.Email;
-            DateOfBirth = other.DateOfBirth;
-            TypingStyle = other.TypingStyle;
-        }
         public int Id { get; set; }
 
         [Required]

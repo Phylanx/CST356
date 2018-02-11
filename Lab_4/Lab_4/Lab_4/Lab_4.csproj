@@ -157,6 +157,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProjectListModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -202,10 +203,10 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
-    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

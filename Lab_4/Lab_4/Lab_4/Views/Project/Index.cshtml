@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Lab_4.Models.ProjectModel>
+﻿@model Lab_4.Models.ProjectListModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Projects for @ViewBag.UserName</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { id = Model.UserId })
 </p>
 <table class="table">
     <tr>
@@ -18,12 +18,12 @@
             @Html.DisplayNameFor(model => model.StartDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.IsCompleted)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.ProjectsList) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ProjectName)
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.StartDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
+            @Html.DisplayFor(modelItem => item.IsCompleted)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
