@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="styles/app.css" />
+    <script src="scripts/app.js"></script>
+</head>
+<body>
+    <header>
+        <h1>
+            Registration Page
+        </h1>
+    </header>
+
+    <nav>
+        <a href="Index.html">Home</a> |
+        <a href="Help.html">Help</a>
+    </nav> 
+
+    <form class="dark light-border">
+        <div>
+            <p class="form-entry">
+                First Name <input id="first" type="text" value="">
+            </p>
+            <p class="form-entry">
+                Last Name <input id="last" type="text" value="">
+            </p>
+            <p class="form-entry">
+                Age <input id="age" type="number">
+            </p>
+            <p class="form-entry">
+                <label for="school">Class Standing : </label>
+                Freshman  <input id="fresh" type="radio" name="schoolYear" value="Freshman" checked="checked"> | 
+                
+                Sophmore <input id="soph" type="radio" name="schoolYear" value="Sophmore"> | 
+
+                Junior <input id="jr" type="radio" name="schoolYear" value="Junior"> | 
+
+                Senior <input id="sr" type="radio" name="schoolYear" value="Senior"> | 
+
+                Other <input id="other" type="radio" name="schoolYear" value="Other"> 
+            </p>
+            <p>
+                <input type="button" value="Submit" onclick="summary()">
+            </p>
+
+            <p id="name-summary"></p>
+            <p id="age-summary"></p>
+            <p id="standing-summary"></p>
+        </div>
+    </form>
+
+
+    <footer>
+        <p>Presented by: David Russell &copy;</p>
+        <p>In collaboration with <a href="https://www.google.com/">our Robot Overlord</a> inc. <img src="bad.png" height="80" alt="" /></p>
+    </footer>
+
+</body>
+</html>
