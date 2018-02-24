@@ -17,72 +17,40 @@ namespace Lab_5.Data
 
         private AppDbContext Data { get; set; }
 
-        public IEnumerable<UserViewModel> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
-            var userViewModels = new List<UserViewModel>();
+            var users = new List<User>();
             
             foreach (var user in Data.Users)
             {
-                userViewModels.Add(ToModel(user));
+                users.Add(user);
             }
-            return userViewModels;
+            return users;
         }
 
-        public UserViewModel GetUser(int id)
+        public User GetUser(int id)
         {
-            var user = Data.Users.Find(id);
-            return ToModel(user);
+            return Data.Users.Find(id);
         }
-
-        private UserViewModel ToModel(User user)
-        {
-            return new UserViewModel
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                MiddleName = user.MiddleName,
-                LastName = user.LastName,
-                EmailAddress = user.EmailAddress,
-                DOB = user.DOB,
-                Fingers = user.Fingers
-            };
-        }
-
-        public User ToUser(UserViewModel userModel)
-        {
-            return new User
-            {
-                Id = userModel.Id,
-                FirstName = userModel.FirstName,
-                MiddleName = userModel.MiddleName,
-                LastName = userModel.LastName,
-                EmailAddress = userModel.EmailAddress,
-                DOB = userModel.DOB,
-                Fingers = userModel.Fingers
-            };
-        }
-
+        
         public void SaveUser(User user)
         {
             Data.Users.Add(user);
-            Data.SaveChanges();
+            Data.SaveContextChanges();
         }
 
-        public void Update(UserViewModel userModel)
+        public void UpdateUser(User user)
         {
-            var user = Data.Users.Find(userModel.Id);
-            ModifyUser(user, userModel);
-            Data.SaveChanges();
-        }
+            var oldUser = Data.Users.Find(user.Id);
 
-        private void ModifyUser(User user, UserViewModel userModel)
-        {
-            user.FirstName = userModel.FirstName;
-            user.MiddleName = userModel.MiddleName;
-            user.LastName = userModel.LastName;
-            user.EmailAddress = userModel.EmailAddress;
-            user.DOB = userModel.DOB;
-            user.Fingers = userModel.Fingers;
+            oldUser.FirstName = user.FirstName;
+            oldUser.MiddleName = user.MiddleName;
+            oldUser.LastName = user.LastName;
+            oldUser.EmailAddress = user.EmailAddress;
+            oldUser.DOB = user.DOB;
+            oldUser.Fingers = user.Fingers;
+            
+            Data.SaveContextChanges();
         }
 
         public void DeleteUser(int id)
@@ -93,88 +61,58 @@ namespace Lab_5.Data
             }
 
             Data.Users.Remove(Data.Users.Find(id));
-            Data.SaveChanges();
+            Data.SaveContextChanges();
         }
 
         ///////
 
 
-        public ICollection<PCViewModel> GetUserPCs(int userId)
+        public ICollection<PC> GetUserPCs(int userId)
         {
-            var userPCModels = new List<PCViewModel>();
+            var PCs = new List<PC>();
             foreach (var pc in Data.PCs)
             {
                 if (pc.UserId == userId)
                 {
-                    userPCModels.Add(ToPcModel(pc));
+                    PCs.Add(pc);
                 }
             }
-            return userPCModels;
+            return PCs;
         }
 
-        public PCViewModel GetPC(int id)
+        public PC GetPC(int id)
         {
-            var db = new AppDbContext();
-            var pc = db.PCs.Find(id);
-            return ToPcModel(pc);
+            return Data.PCs.Find(id);
         }
-
-        private PCViewModel ToPcModel(PC pc)
+       
+        public void SavePc(PC pc)
         {
-            return new PCViewModel
-            {
-                Id = pc.Id,
-                Name = pc.Name,
-                GB_Memory = pc.GB_Memory,
-                GB_Storage = pc.GB_Storage,
-                MHZ_Processor = pc.MHZ_Processor,
-                ReadyForUpgrade = pc.ReadyForUpgrade,
-                UserId = pc.UserId
-            };
+            Data.PCs.Add(pc);
+            Data.SaveContextChanges();
         }
 
-        public PC ToPC(PCViewModel pc)
+        public void UpdatePc(PC pc)
         {
-            return new PC
-            {
-                Id = pc.Id,
-                Name = pc.Name,
-                GB_Memory = pc.GB_Memory,
-                GB_Storage = pc.GB_Storage,
-                MHZ_Processor = pc.MHZ_Processor,
-                ReadyForUpgrade = pc.ReadyForUpgrade,
-                UserId = pc.UserId
-            };
+            var oldPc = Data.PCs.Find(pc.Id);
+
+            oldPc.Name = pc.Name;
+            oldPc.GB_Memory = pc.GB_Memory;
+            oldPc.GB_Storage = pc.GB_Storage;
+            oldPc.MHZ_Processor = pc.MHZ_Processor;
+            oldPc.ReadyForUpgrade = pc.ReadyForUpgrade;
+            oldPc.UserId = pc.UserId;
+
+            Data.SaveContextChanges();
         }
 
-        public void savePc(PCViewModel pc)
-        {
-            Data.PCs.Add(ToPC(pc));
-            Data.SaveChanges();
-        }
-
-        public void UpdatePc(PCViewModel pc)
-        {
-            var pcToUpdate = Data.PCs.Find(pc.Id);
-
-            pcToUpdate.Name = pc.Name;
-            pcToUpdate.GB_Memory = pc.GB_Memory;
-            pcToUpdate.GB_Storage = pc.GB_Storage;
-            pcToUpdate.MHZ_Processor = pc.MHZ_Processor;
-            pcToUpdate.ReadyForUpgrade = pc.ReadyForUpgrade;
-            pcToUpdate.UserId = pc.UserId;
-
-            Data.SaveChanges();
-        }
-
-        public void removePc(int id)
+        public void DeletePc(int id)
         {
             var pc = Data.PCs.Find(id);
 
             if (pc != null)
             {
                 Data.PCs.Remove(pc);
-                Data.SaveChanges();
+                Data.SaveContextChanges();
             }
         }
     }

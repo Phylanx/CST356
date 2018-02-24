@@ -1,6 +1,7 @@
 ﻿using Lab_5.Data;
 using Lab_5.Data.Entities;
 using Lab_5.Models;
+using Lab_5.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,17 @@ namespace Lab_5.Controllers
 {
     public class UserController : Controller
     {
-        private Repository DbService { get; set;}
-
-        public UserController()
+        private IDataService Service { get; set;}
+        
+        public UserController(IDataService service)
         {
-            DbService = new Repository(new AppDbContext());
-        }
-
-        UserController(Repository repository)
-        {
-            DbService = repository;
+            Service = service;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View(DbService.GetAllUsers());
+            return View(Service.GetAllUsers());
         }
 
         [HttpGet]
@@ -40,7 +36,7 @@ namespace Lab_5.Controllers
         {
             if (ModelState.IsValid)
             {
-                DbService.SaveUser(DbService.ToUser(userModel));
+                Service.SaveUser(Service.ToUser(userModel));
                 return RedirectToAction("Index");
             }
             else
@@ -51,13 +47,13 @@ namespace Lab_5.Controllers
 
         public ActionResult Details(int id)
         {
-            return View(DbService.GetUser(id));
+            return View(Service.GetUser(id));
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View(DbService.GetUser(id));
+            return View(Service.GetUser(id));
         }
 
         [HttpPost]
@@ -65,7 +61,7 @@ namespace Lab_5.Controllers
         {
             if (ModelState.IsValid)
             {
-                DbService.Update(userModel);
+                Service.Update(userModel);
                 return RedirectToAction("Index");
             }
             return View();
@@ -73,7 +69,7 @@ namespace Lab_5.Controllers
 
         public ActionResult Delete(int id)
         {
-            DbService.DeleteUser(id);
+            Service.DeleteUser(id);
             return RedirectToAction("Index");
         }
 

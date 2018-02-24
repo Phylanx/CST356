@@ -2,6 +2,9 @@
 using System.Web.Mvc;
 using SimpleInjector;
 using Lab_5.Data;
+using SimpleInjector.Integration.Web.Mvc;
+using SimpleInjector.Integration.Web;
+using Lab_5.Services;
 
 namespace Lab_5.App_Start
 {
@@ -15,6 +18,7 @@ namespace Lab_5.App_Start
 
             // Register your types, for instance:
             container.Register<IRepository, Repository>(Lifestyle.Scoped);
+            container.Register<IDataService, DataService>(Lifestyle.Scoped);
             container.Register<AppDbContext, AppDbContext>(Lifestyle.Scoped);
 
             // This is an extension method from the integration package.

@@ -1,6 +1,7 @@
 ﻿using Lab_5.Data;
 using Lab_5.Data.Entities;
 using Lab_5.Models;
+using Lab_5.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,17 @@ namespace Lab_5.Controllers
 {
     public class PCController : Controller
     {
-        private Repository DbService {get; set;}
-        
-        public PCController()
-        {
-            DbService = new Repository(new AppDbContext());
-        }
+        private IDataService Service {get; set;}
 
-        public PCController(Repository repository)
+        public PCController(IDataService service)
         {
-            DbService = repository;
+            Service = service;
         }
 
         public ActionResult Index(int userId)
         {
             ViewBag.UserId = userId;
-            return View(DbService.GetUserPCs(userId));
+            return View(Service.GetUserPCs(userId));
         }
 
         [HttpGet]
@@ -42,7 +38,7 @@ namespace Lab_5.Controllers
             ViewBag.UserId = pc.UserId;
             if (ModelState.IsValid)
             {
-                DbService.savePc(pc);
+                Service.savePc(pc);
                 return RedirectToAction("Index", new { UserId = pc.UserId });
             }
             return View();
@@ -51,7 +47,7 @@ namespace Lab_5.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var pcModel = DbService.GetPC(id);
+            var pcModel = Service.GetPC(id);
             ViewBag.UserId = pcModel.UserId;
             return View(pcModel);
         }
@@ -62,7 +58,7 @@ namespace Lab_5.Controllers
             ViewBag.UserId = pc.UserId;
             if (ModelState.IsValid)
             {
-                DbService.UpdatePc(pc);
+                Service.UpdatePc(pc);
                 return RedirectToAction("Index", new { UserId = pc.UserId });
             }
             return View();
@@ -70,14 +66,14 @@ namespace Lab_5.Controllers
 
         public ActionResult Delete(int id)
         {
-            var userId = DbService.GetPC(id).UserId;
-            DbService.removePc(id);
+            var userId = Service.GetPC(id).UserId;
+            Service.removePc(id);
             return RedirectToAction("Index", new { UserId = userId });
         }
 
         public ActionResult Details(int id)
         {
-            var pcModel = DbService.GetPC(id);
+            var pcModel = Service.GetPC(id);
             ViewBag.UserId = pcModel.UserId;
             return View(pcModel);
         }

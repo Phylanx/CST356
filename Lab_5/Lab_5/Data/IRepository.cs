@@ -9,19 +9,17 @@ namespace Lab_5.Data
 {
     public interface IRepository
     {
-        IEnumerable<UserViewModel> GetAllUsers();
-        UserViewModel GetUser(int id);
-        User ToUser(UserViewModel userModel);
+        IEnumerable<User> GetAllUsers();
+        User GetUser(int id);
         void SaveUser(User user);
-        void Update(UserViewModel userModel);
+        void UpdateUser(User user);
         void DeleteUser(int id);
         ////
-        ICollection<PCViewModel> GetUserPCs(int userId);
-        PCViewModel GetPC(int id);
-        PC ToPC(PCViewModel pc);
-        void savePc(PCViewModel pc);
-        void UpdatePc(PCViewModel pc);
-        void removePc(int id);
+        ICollection<PC> GetUserPCs(int userId);
+        PC GetPC(int id);
+        void SavePc(PC pc);
+        void UpdatePc(PC pc);
+        void DeletePc(int id);
 
 
     }

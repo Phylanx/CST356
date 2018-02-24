@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Lab_5.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext, IDbContext
     {
         public AppDbContext()
         {
@@ -21,6 +21,11 @@ namespace Lab_5.Data
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<PC> PCs { get; set; }
+
+        public void SaveContextChanges()
+        {
+            SaveChanges();
+        }
 
         public System.Data.Entity.DbSet<Lab_5.Models.UserViewModel> UserViewModels { get; set; }
 
