@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Lab_7.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="well well-sm">Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-condensed table-bordered table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fingers)
+        </th>
+        <th></th>
+    </tr>
+    @{
+        int counter = 0;
+    }
+    @foreach (var item in Model)
+    {
+        ++counter;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fingers)
+            </td>
+            <td>
+                @Html.ActionLink("PCs", "Index", "PC", new { userId = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+<button id="hide-table" type="button" class="btn btn-primary">Collapse Table</button>
+<button id="show-table" type="button" class="btn btn-primary" disabled>Expand Table</button>
+
+<div class="alert alert-info alert-dismissible" style="display:@(counter < 2 ? "none" : "inherit")">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Alert!</strong> More than one user found...
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#hide-table").click(function () {
+                $("table").hide();
+                $(this).prop("disabled", true);
+                $("#show-table").prop("disabled", false);
+            });
+
+            $("#show-table").click(function () {
+                $("table").show();
+                $(this).prop("disabled", true);
+                $("#hide-table").prop("disabled", false);
+            });
+            
+        });
+    </script>
+}

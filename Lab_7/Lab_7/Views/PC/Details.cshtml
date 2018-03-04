@@ -1,0 +1,59 @@
+﻿@model Lab_7.Models.PCViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PCViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GB_Memory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GB_Memory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GB_Storage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GB_Storage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MHZ_Processor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MHZ_Processor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReadyForUpgrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReadyForUpgrade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new { ViewBag.UserId })
+</p>
+

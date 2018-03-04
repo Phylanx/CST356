@@ -1,0 +1,12 @@
+﻿https://petermcintyre.com/topics/aspnet-mvc-fix-cannot-attach-the-file-as-database/
+for fixing 'cannot attach file ___ as database ___' error after deleting project and manually rebuilding it
+
+Open package manager console 
+			tools->NuGet Package Manager -> Package Manager Console
+
+enter:
+		sqllocaldb stop MSSQLLocalDB
+then enter:
+		sqllocaldb delete MSSQLLocalDB
+
+now the database will be able to be created
