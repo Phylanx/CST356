@@ -1,0 +1,5 @@
+DEBUG 2018-03-16 19:50:28,754  6974ms UserController         Index              - Getting list of users
+DEBUG 2018-03-16 19:51:02,540 40759ms UserController         Index              - Getting list of users
+DEBUG 2018-03-16 19:51:06,377 44596ms UserController         Index              - Getting list of users
+DEBUG 2018-03-16 19:51:08,490 46709ms UserController         Index              - Getting list of users
+DEBUG 2018-03-16 19:51:16,049 54269ms UserController         Index              - Getting list of users

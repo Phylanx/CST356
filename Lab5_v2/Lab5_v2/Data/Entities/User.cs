@@ -14,6 +14,6 @@ namespace Lab5_v2.Data.Entities
         public String mName { get; set; }
         public String lName { get; set; }
         public int age { get; set; }
-        public ICollection<Shoes> Shoes { get; set; }
+        //public ICollection<Shoes> Shoes { get; set; }
     }
 }

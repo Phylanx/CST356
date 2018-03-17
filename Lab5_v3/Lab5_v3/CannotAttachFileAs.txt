@@ -1,0 +1,17 @@
+﻿
+error:
+	Cannot attach the file 'C:\Users\David\Dropbox\School\CST356\Lab5_v3\Lab5_v3\App_Data\AppDatabase.mdf' as database 'App'
+
+cause:
+	reusing same DB name for multiple versions
+
+solutions:
+	rename 'AppDatabase.mdf' in Web.config connection string to something else
+	
+	delete old DB
+		method:
+			open Package Manager Console and enter:
+				sqllocaldb.exe stop
+			then enter:
+				sqllocaldb.exe delete
+			Next time the program is ran it will not find the DB so it will create one

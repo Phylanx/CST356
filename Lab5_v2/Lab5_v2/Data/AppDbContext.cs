@@ -20,11 +20,9 @@ namespace Lab5_v2.Data
             Database.SetInitializer(new AppDbInitializer());
         }
 
-        public System.Data.Entity.DbSet<Lab5_v2.Models.UserViewModel> UserViewModels { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Shoes> Shoes { get; set; }
-
-        public System.Data.Entity.DbSet<Lab5_v2.Models.ShoesViewModel> ShoesViewModels { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Shoes> Shoes { get; set; }
+        
     }
 
     public class AppDbInitializer : DropCreateDatabaseIfModelChanges<AppDbContext> { }

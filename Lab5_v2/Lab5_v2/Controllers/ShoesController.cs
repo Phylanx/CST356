@@ -16,24 +16,28 @@ namespace Lab5_v2.Controllers
             _shoesService = service;
         }
         // GET: Shoes
+
         public ActionResult Index(int userId)
         {
             ViewBag.UserId = userId;
             return View( _shoesService.GetAllUserShoes(userId) );
         }
+
         [HttpGet]
         public ActionResult Create(int userId)
         {
             ViewBag.UserId = userId;
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(ShoesViewModel shoes)
         {
+            ViewBag.UserId = shoes.OwnerId;
             if(ModelState.IsValid)
             {
                 _shoesService.SaveShoes( shoes );
-                return RedirectToAction("Index", new { userId = ViewBag.UserId });
+                return RedirectToAction("Index", new { UserId = shoes.OwnerId });
             }
             return View();
         }
