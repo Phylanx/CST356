@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab_8.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,9 @@ namespace Lab_8
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            DependencyInjectionConfig.Register();
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }

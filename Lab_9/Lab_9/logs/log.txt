@@ -1,0 +1,11 @@
+DEBUG 2018-03-17 13:27:36,876  6746ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:28:07,835 37704ms UserController         Create             - User saved
+DEBUG 2018-03-17 13:28:07,850 37719ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:28:16,295 46165ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:35:10,716 460585ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:35:46,362 496231ms UserController         Create             - User saved
+DEBUG 2018-03-17 13:35:46,380 496249ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:35:53,149 503019ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:36:01,495 511365ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:36:04,737 514607ms UserController         Index              - Getting list of users
+DEBUG 2018-03-17 13:36:53,754 563624ms UserController         Index              - Getting list of users

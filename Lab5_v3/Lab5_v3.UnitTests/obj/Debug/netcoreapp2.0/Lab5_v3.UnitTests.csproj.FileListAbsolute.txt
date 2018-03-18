@@ -41,3 +41,5 @@ C:\Users\David\Dropbox\School\CST356\Lab5_v3\Lab5_v3.UnitTests\bin\Debug\netcore
 C:\Users\David\Dropbox\School\CST356\Lab5_v3\Lab5_v3.UnitTests\bin\Debug\netcoreapp2.0\System.Web.WebPages.Deployment.xml
 C:\Users\David\Dropbox\School\CST356\Lab5_v3\Lab5_v3.UnitTests\obj\Debug\netcoreapp2.0\Lab5_v3.UnitTests.dll
 C:\Users\David\Dropbox\School\CST356\Lab5_v3\Lab5_v3.UnitTests\obj\Debug\netcoreapp2.0\Lab5_v3.UnitTests.pdb
+C:\Users\David\Dropbox\School\CST356\Lab5_v3\Lab5_v3.UnitTests\bin\Debug\netcoreapp2.0\log4net.dll
+C:\Users\David\Dropbox\School\CST356\Lab5_v3\Lab5_v3.UnitTests\bin\Debug\netcoreapp2.0\log4net.xml
