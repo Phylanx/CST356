@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Final.Web.Models.Entities.ShoeModel>
+
+@{
+    ViewBag.Title = "Closet";
+}
+
+<h2>Shoes</h2>
+
+<p>
+    @Html.ActionLink("New Shoes", "ShoeCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Style)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPair)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Style)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPair)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ShoeUpdate", new { id = item.Id }) |
+            @Html.ActionLink("Descripton", "ShoeInfo", new { id = item.Id }) |
+            @Html.ActionLink("Throw Away", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

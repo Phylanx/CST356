@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Final.Web.Models.Entities.ProjectModel>
+
+@{
+    ViewBag.Title = "Project Folder";
+}
+
+<h2>Projects</h2>
+
+<p>
+    @Html.ActionLink("New Project", "ProjectCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Finish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Completed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Finish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Completed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ProjectUpdate", new { id=item.Id }) |
+            @Html.ActionLink("Details", "ProjectInfo", new { id=item.Id }) |
+            @Html.ActionLink("Erase", "ProjectDelete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
